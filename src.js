@@ -58,8 +58,6 @@ const submitQuiz = ()=>{
             let question = questions[i];
             if(selectedAnswers[`${question.question}`] != undefined){
                 attempted++;
-                // console.log(selectedAnswers[`${question.question}`]);
-                // console.log(question.answer)
                 if(selectedAnswers[`${question.question}`] == question.answer){
                     correct++;
                 }else{
