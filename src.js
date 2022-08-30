@@ -5,24 +5,23 @@ let index;
 
 const generateOptions = () => {
     let options = ``;
-    for (let i = 0; i < question.options.length; i++) {
+    for(let i = 0; i < question.options.length; i++){
         let option = question.options[i];
         let selected = false;
         if(selectedAnswers[`${question.question}`] == option){
             selected = true;
         }
         options += `<div class="each-answer">
-        <input type="radio" name="answer-btn" ${selected ? "checked='true'" : ""} onclick="addAnswer()" value="${option}">
-        ${option}
-        </div>`;
+        <input type="radio" onclick="addAnswer()" ${selected ? "checked='true'" : ""} name="answer-btn" value="${option}"> ${option}
+    </div>`;
     }
     return options;
 }
 
 const generateJumpBtns = ()=>{
     let btns = ``;
-    for(let i = 0; i < questions.length; i++){
-        btns += `<button class="jumper-button ${i == index ? "active" : ""}" onclick="${i != index ? `showQuestion(${i})` : ""}">${i + 1}</button>`;
+    for( let i = 0; i < questions.length; i++){
+        btns += `<button class="jumper-button ${i == index ? "active" : ""}" onclick="showQuestion(${i})">${i + 1}</button>`;
     }
     return btns;
 }
@@ -47,7 +46,7 @@ const submitQuiz = ()=>{
     let message = `Are you sure you want to submit?`;
     let answered = Object.keys(selectedAnswers);
     if(answered.length < questions.length){
-        message += `\nYou have ${questions.length - answered.length} questions out of ${questions.length} unanswered`;
+        message += `\nYou have ${questions.length - answered.length} questions out of ${questions.length} unanswered.`
     }
     let ask = confirm(message);
     let attempted = 0;
@@ -70,15 +69,15 @@ const submitQuiz = ()=>{
         <div class="result-details">
             <div>
                 <div>Attempted</div>
-                <div>${attempted}/${questions.length}</div>
+                <div>${attempted} / ${questions.length}</div>
             </div>
             <div>
                 <div>Correct</div>
-                <div>${correct}/${questions.length}</div>
+                <div>${correct} / ${questions.length}</div>
             </div>
             <div>
                 <div>Wrong</div>
-                <div>${wrong}/${questions.length}</div>
+                <div>${wrong} / ${questions.length}</div>
             </div>
         </div>
         <button class="jumper-button" onclick="restartQuiz()">Restart</button>
@@ -86,34 +85,28 @@ const submitQuiz = ()=>{
     }
 }
 
-const showQuestion = (i) => {
+const showQuestion = (i)=>{
     index = i;
-    if (questions[index]) {
+    if(questions[index]){
         question = questions[index];
-        let options = generateOptions(index);
-        let jumpBtns = generateJumpBtns(index);
-
-
-        quizContainer.innerHTML = `
-            <div class="pointer-container">
-                <h3>
-                    Question ${index + 1} of ${questions.length}
-                </h3>
-            </div>
-            <div>
-                ${question.question}
-            </div>
-            <div class="answers-container">
-                ${options}
-            </div>
-            <div class="action-btns">
-                ${index > 0 ? `<button class="prev-next" onclick="showQuestion(${index - 1})">Previous</button>` : ""}
-                ${jumpBtns}
-                ${index < questions.length - 1 ? `<button class="prev-next" onclick="showQuestion(${index + 1})">Next</button>` : ""}
-                <button class="prev-next" style="background-color : red;" onclick="submitQuiz()">Submit</button>
-            </div>`
-        ;
-    } else {
+        let options = generateOptions();
+        let jumpBtns = generateJumpBtns();
+        quizContainer.innerHTML = `<div class="pointer-container">
+        <h3>Question ${index + 1} of ${questions.length}</h3>
+    </div>
+    <div>
+        ${question.question}
+    </div>
+    <div class="answers-containers">
+        ${options}
+    </div>
+    <div class="action-btns">
+        ${index > 0 ? `<button class="prev-next" onclick="showQuestion(${index} - 1)">Previous</button>` : ""}
+        ${jumpBtns}
+        ${index < questions.length - 1 ? `<button class="prev-next" onclick="showQuestion(${index} + 1)">Next</button>` : ""}
+        <button class="prev-next" onclick="submitQuiz()" style="background-color: red;">Submit</button>
+    </div>`;
+    }else{
         alert("Invalid question");
     }
 }

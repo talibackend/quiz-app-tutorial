@@ -1,6 +1,23 @@
 const questions = [
     {
-        question : "Which of these is a programming language",
+        question : "What is the name of this channel",
+        options : [
+            "Code Sculptor",
+            "Code Builder",
+            "Code Destroyer",
+            "Code Maker"
+        ],
+        answer : "Code Sculptor"
+    },
+    {
+        question : "1 + 1 is?",
+        options : [
+            "2", "3", "5", "19"
+        ],
+        answer : 2
+    },
+    {
+        question : "Which of this is a programming language?",
         options : [
             "HTML",
             "CSS",
@@ -10,33 +27,13 @@ const questions = [
         answer : "Javascript"
     },
     {
-        question : "What is the name of this channel",
+        question : "What is my name",
         options : [
-            "Code Builder",
-            "Code Sculptor",
-            "Code Machine",
-            "Code Destroyer"
+            "Femi Fatokun",
+            "David Shokunbi",
+            "Wale Adenusi",
+            "Daniel Adewale"
         ],
-        answer : "Code Sculptor"
-    },
-    {
-        question : "Which of these is not a continent",
-        options : [
-            "USA",
-            "Africa",
-            "Asia",
-            "Europe"
-        ],
-        answer : "USA"
-    },
-    {
-        question : "1 + 1 is?",
-        options : [
-            "9",
-            "11",
-            "3",
-            "2"
-        ],
-        answer : "2"
+        answer : "Femi Fatokun"
     }
 ]
